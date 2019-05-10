@@ -17,7 +17,9 @@ npx create-react-app test-react --scripts-version klagan-startup-react-scripts
 
 ## Types of tests
 
-### Static tests
+Mainly there are four types of testing
+
+### Static tests
 
 This test check syntax erros and type errors.
 
@@ -93,8 +95,10 @@ E2E tests is for test all the proyect and will be in root project.
 
 ### React component
 
+This is the react components
+
 ```jsx
-// button.js
+// Button.js
 // @flow
 import React from 'react'
 import type { Props } from './types'
@@ -102,65 +106,6 @@ const Button = (props: Props) => (
     <button onClick={props.onPress}>{props.text}</button>
 )
 export default Button
-```
-
-```js
-// types.js
-// @flow
-export type Props = {
-    onPress: () => void,
-    text: string,
-}
-```
-
-### Unit test
-```js
-// setup.js
-// @flow
-import React from 'react'
-import { shallow } from 'enzyme'
-import Button from '../Button'
-const props: any = {
-    onPress: jest.fn(),
-    text: 'I am a button',
-}
-function setup(extraProps: any = {}) {
-    const newProps = { ...props, ...extraProps }
-    return {
-        props: newProps,
-        wrapper: shallow(<Button {...newProps} />),
-    }
-}
-export default setup
-```
-
-```js
-// button.unit.test.js
-import setup from './setup'
-describe('Button test', () => {
-    const { wrapper, props } = setup()
-    describe('should be render with a button', () => {
-        test('should have one button', () => {
-            expect(wrapper.find('button')).toHaveLength(1)
-        })
-        test('should have a text', () => {
-            expect(wrapper.find('button').text()).toEqual(props.text)
-        })
-    })
-    describe('should be launch onPress onClick', () => {
-        test('should not pressed', () => {
-            expect(props.onPress).toHaveBeenCalledTimes(0)
-        })
-        test('should press one time', () => {
-            wrapper
-                .find('button')
-                .first()
-                .props()
-                .onClick()
-            expect(props.onPress).toHaveBeenCalledTimes(1)
-        })
-    })
-})
 ```
 
 ```jsx
@@ -198,6 +143,121 @@ class App extends Component<{}, State> {
 export default App
 ```
 
+### Static test
+
+For static test we use flow and eslint
+
+```js
+// Button types.js
+// @flow
+export type Props = {
+    onPress: () => void,
+    text: string,
+}
+```
+
+```js
+// App types.js
+// @flow
+export type State = {
+    data: any,
+}
+```
+
+```js
+// .eslintrc
+{
+    "extends": ["standard", "standard-react"],
+    "parser": "babel-eslint",
+    "plugins": ["jest"],
+    "rules": {
+        "space-before-function-paren": [
+            "error",
+            { "anonymous": "never", "named": "never", "asyncArrow": "always" }
+        ],
+        "comma-dangle": ["error", "only-multiline"],
+        "indent": ["error", 4, { "SwitchCase": 1 }],
+        "react/jsx-indent": [4, 2, { "indentLogicalExpressions": true }],
+        "react/jsx-indent-props": [4, 2],
+        "react/self-closing-comp": [
+            "error",
+            {
+                "component": false
+            }
+        ],
+        "curly": "off",
+        "no-useless-escape": "off"
+    },
+    "env": {
+        "commonjs": true,
+        "mocha": true
+    },
+    "globals": {
+        "fetch": false,
+        "expect": false,
+        "jest": false,
+        "FormData": false
+    }
+}
+```
+
+### Unit test
+
+In the unit test we test the functionality of the component
+
+```js
+// Button setup.js
+// @flow
+import React from 'react'
+import { shallow } from 'enzyme'
+import Button from '../Button'
+const props: any = {
+    onPress: jest.fn(),
+    text: 'I am a button',
+}
+function setup(extraProps: any = {}) {
+    const newProps = { ...props, ...extraProps }
+    return {
+        props: newProps,
+        wrapper: shallow(<Button {...newProps} />),
+    }
+}
+export default setup
+```
+
+```js
+// Button.unit.test.js
+import setup from './setup'
+describe('Button test', () => {
+    const { wrapper, props } = setup()
+    describe('should be render with a button', () => {
+        test('should have one button', () => {
+            expect(wrapper.find('button')).toHaveLength(1)
+        })
+        test('should have a text', () => {
+            expect(wrapper.find('button').text()).toEqual(props.text)
+        })
+    })
+    describe('should be launch onPress onClick', () => {
+        test('should not pressed', () => {
+            expect(props.onPress).toHaveBeenCalledTimes(0)
+        })
+        test('should press one time', () => {
+            wrapper
+                .find('button')
+                .first()
+                .props()
+                .onClick()
+            expect(props.onPress).toHaveBeenCalledTimes(1)
+        })
+    })
+})
+```
+
+### Integration test
+
+In the integration test we test if the diferent component works well between them and if the api call work well too.
+
 ```js
 // App.int.test.js
 import React from 'react'
@@ -224,6 +284,10 @@ describe('SignIn integration test', () => {
     })
 })
 ```
+
+### Mock file
+
+This mock file is for mock the api call
 
 ```json
 // mock.json
