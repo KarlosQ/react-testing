@@ -7,7 +7,7 @@ We will use **Jest** and **Enzyme** for this task
 - [Jest docs](https://jestjs.io/docs/en/getting-started)
 - [Enzyme docs](https://airbnb.io/enzyme/docs/api/)
 
-#Getting started
+# Getting started
 
 First clone the project and install all
 
@@ -299,6 +299,6 @@ This mock file is for mock the api call
 ]
 ```
 
-## TODO
+## TODO
 
 We need improve the tests, do a e2e test and create a repo for react-native testing
