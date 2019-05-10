@@ -9,10 +9,11 @@ We will use **Jest** and **Enzyme** for this task
 
 #Getting started
 
-First we download the project using own create-react-app version
+First clone the project and install all
 
 ```bash
-npx create-react-app test-react --scripts-version klagan-startup-react-scripts
+git clone https://github.com/KarlosQ/react-testing
+yarn install
 ```
 
 ## Types of tests
@@ -65,7 +66,7 @@ We create a simple button. This button would be in components folder.
 
 ### Folder structure :open_file_folder:
 
-We write own tests inside a **\_\_tests\_\_** folder inside the button folder.
+We write own tests inside a **\_\_tests\_\_** folder inside the component folder.
 
 The naming of own tests are:
 
@@ -83,7 +84,7 @@ E2E tests is for test all the proyect and will be in root project.
 │   │   ├── Button.js                       # Button component file.
 │   │   ├── types.js                        # Flow types for Button.
 │   │   ├── __tests__                       # Tests folder.
-│   │   │  ├── Button.unit.test.js	        # Unit test file.
+│   │   │  ├── Button.unit.test.js          # Unit test file.
 │   │   │  ├── setup.js	                    # Setup for testing.
 ├── App                                     # App folder.
 │   │── App.js                              # App component file.
@@ -207,7 +208,6 @@ In the unit test we test the functionality of the component
 
 ```js
 // Button setup.js
-// @flow
 import React from 'react'
 import { shallow } from 'enzyme'
 import Button from '../Button'
@@ -289,12 +289,16 @@ describe('SignIn integration test', () => {
 
 This mock file is for mock the api call
 
-```json
+```js
 // mock.json
 [
     {
         "id": 6104546,
-        // {...}
+        {...}
     }
 ]
 ```
+
+## TODO
+
+We need improve the tests, do a e2e test and create a repo for react-native testing
