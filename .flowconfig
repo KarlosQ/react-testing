@@ -1,0 +1,16 @@
+[ignore]
+
+[include]
+
+[libs]
+flow-typed
+
+[lints]
+
+[options]
+; module-resolver
+module.name_mapper='^#components' ->'<PROJECT_ROOT>/src/components'
+
+module.system.haste.paths.blacklist=.*/__tests__/.*
+
+[strict]

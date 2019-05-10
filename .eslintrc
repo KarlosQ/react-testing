@@ -1,0 +1,33 @@
+{
+    "extends": ["standard", "standard-react"],
+    "parser": "babel-eslint",
+    "plugins": ["jest"],
+    "rules": {
+        "space-before-function-paren": [
+            "error",
+            { "anonymous": "never", "named": "never", "asyncArrow": "always" }
+        ],
+        "comma-dangle": ["error", "only-multiline"],
+        "indent": ["error", 4, { "SwitchCase": 1 }],
+        "react/jsx-indent": [4, 2, { "indentLogicalExpressions": true }],
+        "react/jsx-indent-props": [4, 2],
+        "react/self-closing-comp": [
+            "error",
+            {
+                "component": false
+            }
+        ],
+        "curly": "off",
+        "no-useless-escape": "off"
+    },
+    "env": {
+        "commonjs": true,
+        "mocha": true
+    },
+    "globals": {
+        "fetch": false,
+        "expect": false,
+        "jest": false,
+        "FormData": false
+    }
+}
